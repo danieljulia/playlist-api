@@ -77,7 +77,8 @@ OAuth
           "trackNum": 3,
           "duration" 710000,
           "meta": {"starred": true}
-        }
+        },
+        ...
       ]
     }
 
