@@ -40,7 +40,7 @@ OAuth
 **Ideas & requests:**
 
 - Requesting older versions e.g. stateless undo.
-
+- Store arbitrary values (key-value style) in a playlist
 
 ### XSPF example
 
