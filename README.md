@@ -1,6 +1,6 @@
 # Spotify playlist API
 
-Public collaboration of our upcoming (web-based) playlist API announced at
+Public collaboration of our upcoming (web-based) playlist API during
 [Music Hack Day Amsterdam, Apr 24 2010](http://amsterdam.musichackday.org/).
 
 Abilities:
