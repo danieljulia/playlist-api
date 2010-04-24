@@ -3,6 +3,17 @@
 Public collaboration of our upcoming (web-based) playlist API announced at
 [Music Hack Day Amsterdam, Apr 24 2010](http://amsterdam.musichackday.org/).
 
+Abilities:
+
+- Retrieve the list of playlists for a users
+- Modify the list of playlists for a users
+  - Add a playlist (the left hand column in the desktop client)
+  - Remove a playlist
+  - Reorder the list
+- Query a specific playlist
+- Query a special playlist (i.e. "Starred" or "Purchases")
+- Modify a specific playlist
+
 ## Authentication
 
 OAuth
