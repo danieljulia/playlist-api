@@ -299,19 +299,6 @@ List after the modification:
     3. Track B
 
 
-**Request entitiy**:
-
-List of tracks URIs
-
-Example:
-
-    POST /playlist/6welunS19b7RD9lodXrhuG/add?index=4
-    Content-type: application/json
-    
-    ["spotify:track:5xft6jBZvMHRD1jyTDPQXx","spotify:track:1MD4tX2g5hx0D2WQ6JsC2m"]
-
-
-
 
 
 
