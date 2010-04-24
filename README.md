@@ -8,24 +8,25 @@ OAuth
 
 ## A playlist entity
 
-    identifier    The Spotify URI of the playlist
-    title         Title of the playlist
-    creator       Username of the user who created the playlist
-    trackList     List of tracks
-      Each entry in the trackList member:
-        identifier    The Spotify URI of the track
-        title         Name of the track
-        creator       Artist(s) performing the track
-        album         Album on which the track appears
-        trackNum      The track number on the album (integer)
-        duration      Length of the track in milliseconds (integer)
-        starred       True if the track is "starred" by the authenticated caller
+    version       The version of the playlist in the Spotify system (integer).
+    identifier    The Spotify URI of the playlist.
+    title         Title of the playlist.
+    creator       Username of the user who created the playlist.
+    trackList     List of tracks.
+      identifier    The Spotify URI of the track.
+      title         Name of the track
+      creator       Artist(s) performing the track.
+      album         Album on which the track appears.
+      trackNum      The track number on the album (integer).
+      duration      Length of the track in milliseconds (integer).
+      meta          Further metadata mapped by key prefixed by "spotify:meta:".
+        starred       True if the track is "starred" by the authenticated caller.
 
 
 ### XSPF example
 
     <?xml version="1.0" encoding="utf-8"?>
-    <playlist xmlns="http://xspf.org/ns/0/" version="1">
+    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com" version="1" sp:version="123">
       <identifier>spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG</identifier>
       <title>Spotify playlist</title>
       <creator>smedjan</creator>
@@ -44,6 +45,7 @@ OAuth
 ### JSON example
 
     {
+      "version": 123,
       "identifier": "spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG",
       "title": "Spotify playlist",
       "creator": "smedjan",
@@ -61,7 +63,7 @@ OAuth
           },
           "trackNum": 3,
           "duration" 710000,
-          "starred": true
+          "meta": {"starred": true}
         }
       ]
     }
