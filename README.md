@@ -47,7 +47,7 @@ OAuth
 ### XSPF example
 
     <?xml version="1.0" encoding="utf-8"?>
-    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com"
+    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://www.spotify.com/ns/music/1"
         version="1" sp:version="123">
       <identifier>spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG</identifier>
       <title>Spotify playlist</title>
@@ -171,7 +171,7 @@ JSON response:
 XML response:
 
     <?xml version="1.0" encoding="utf-8"?>
-    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com" 
+    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://www.spotify.com/ns/music/1" 
         version="1" sp:version="4">
       <trackList>
         <track>
