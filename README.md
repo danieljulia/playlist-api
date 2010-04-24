@@ -1,6 +1,7 @@
 # Spotify playlist API
 
-Public collaboration of our upcoming (web-based) playlist API announced at [Music Hack Day Amsterdam, Apr 24 2010](http://amsterdam.musichackday.org/).
+Public collaboration of our upcoming (web-based) playlist API announced at
+[Music Hack Day Amsterdam, Apr 24 2010](http://amsterdam.musichackday.org/).
 
 ## Authentication
 
@@ -89,11 +90,16 @@ Further called `{playlist}`.
 
 ## Error responses
 
-As the API is restricted to HTTP we make use of the HTTP protocol when it comes to error indication. The status of any HTTP response is represented by a standard status code. The ranges are as follows:
+As the API is restricted to HTTP we make use of the HTTP protocol when it comes
+to error indication. The status of any HTTP response is represented by a
+standard status code. The ranges are as follows:
 
-See [Status Code Definitions, RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) for further details.
+See [Status Code Definitions, RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
+for further details.
 
-The response entity of an error (unless in the case of "bodyless" responses, as defined by [HTTP/1.1](http://www.w3.org/Protocols/rfc2616/rfc2616.html)) contains a simple human-readable message, primarily aiding development.
+The response entity of an error (unless in the case of "bodyless" responses, as
+defined by [HTTP/1.1](http://www.w3.org/Protocols/rfc2616/rfc2616.html))
+contains a simple human-readable message, primarily aiding development.
 
 XML response:
 
