@@ -27,7 +27,8 @@ OAuth
 ### XSPF example
 
     <?xml version="1.0" encoding="utf-8"?>
-    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com" version="1" sp:version="123">
+    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com"
+        version="1" sp:version="123">
       <identifier>spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG</identifier>
       <title>Spotify playlist</title>
       <creator>smedjan</creator>
@@ -116,7 +117,7 @@ JSON response:
 
 ## API methods
 
-### GET /user/playlists -> ordered list of {playlist}s
+### GET /user/playlists/regular -> ordered list of {playlist}s
 
     GET /smedjan/playlists.json
 
@@ -125,6 +126,7 @@ JSON response:
     {
       "playlists":[
         {
+          "version": "4",
           "identifier": "spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG",
           "title": "Spotify playlist",
           "creator": "smedjan"
@@ -136,7 +138,8 @@ JSON response:
 XML response:
 
     <?xml version="1.0" encoding="utf-8"?>
-    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com" version="1">
+    <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://spotify.com" 
+        version="1" sp:version="4">
       <trackList>
         <track>
           <extension application="http://spotify.com">
@@ -151,14 +154,19 @@ XML response:
     </playlist>
 
 
-### GET /user/playlists/starred -> {playlist}
+### GET /playlist/{id} -> {playlist}
+
+Retrieve any playlist by identifier `{id}`.
+
+
+### GET /user/playlists/special/starred -> {playlist}
 
 Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
 
 The response is the same as for any playlist.
 
 
-### GET /user/playlists/purchases -> {playlist}
+### GET /user/playlists/special/purchases -> {playlist}
 
 Retrieve `user`s special "Purchases" playlist, containing all tracks a user has purchased.
 
