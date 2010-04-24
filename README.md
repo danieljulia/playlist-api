@@ -248,13 +248,56 @@ Create a new playlist as the authenticated user.
 A {playlist} object, except the `version` and `identifier` members should not be present.
 
 
-### POST /playlist/{id}/add?index={position} <- list of track URIs
+### POST /playlist/{id}/add?index <- list of track URIs
 
 Insert one or more tracks into playlist `{id}` at `{index}`.
 
 **Authorization:** required, same owner or collaborator
 
-- `index={position}` The position in the list where to insert the tracks. Indices are 0-based.
+- `index` The position in the list where to insert the tracks. Indices are 0-based.
+
+**Request entitiy**:
+
+List of tracks URIs
+
+Example:
+
+    POST /playlist/6welunS19b7RD9lodXrhuG/add?index=4
+    Content-type: application/json
+    
+    ["spotify:track:5xft6jBZvMHRD1jyTDPQXx","spotify:track:1MD4tX2g5hx0D2WQ6JsC2m"]
+
+
+### POST /playlist/{id}/remove?src-index&src-count&dst-index <- list of track URIs
+
+Insert one or more tracks into playlist `{id}` at `{index}`.
+
+**Authorization:** required, same owner or collaborator
+
+- `src-index` The start position of the tracks to move.
+- `src-count` The number of tracks, starting at `src-index`, to move (or "select").
+- `dst-index` The position where to move (or "land") the tracks, expressed in your versions coordinates.
+
+Example -- move the first two tracks down past the next two tracks:
+
+List before the modification:
+
+    0. Track A
+    1. Track B
+    2. Track C
+    3. Track D
+
+POSTing:
+
+    POST /playlist/6welunS19b7RD9lodXrhuG/remove?src-index=0&src-count=2&dst-index=2
+
+List after the modification:
+
+    0. Track C
+    1. Track D
+    2. Track A
+    3. Track B
+
 
 **Request entitiy**:
 
