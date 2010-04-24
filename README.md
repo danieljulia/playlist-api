@@ -37,11 +37,12 @@ OAuth
       meta          Further metadata mapped by key prefixed by "spotify:meta:".
         starred       True if the track is "starred" by the authenticated caller.
 
-**Ideas & requests:**
+## Ideas & requests under consideration
 
 - Requesting older versions e.g. stateless undo.
 - Store arbitrary values (key-value style) in a playlist
 - Embedded statistics (e.g. track popularity, subscribers, etc)
+
 
 ### XSPF example
 
