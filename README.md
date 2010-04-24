@@ -349,6 +349,8 @@ Toggle collaborative mode for playlist `{id}`.
 
 Assign a custom image to playlist `{id}`.
 
+**Authorization:** required, same owner
+
 **Request entity**:
 
 The image data. An empty request entity means "clear the image".
@@ -365,6 +367,8 @@ Example:
 ### POST /playlist/{id}/annotation <- text
 
 Edit the free-text description of playlist `{id}`.
+
+**Authorization:** required, same owner
 
 **Request entity**:
 
