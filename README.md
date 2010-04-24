@@ -41,6 +41,7 @@ OAuth
 
 - Requesting older versions e.g. stateless undo.
 - Store arbitrary values (key-value style) in a playlist
+- Embedded statistics (e.g. track popularity, subscribers, etc)
 
 ### XSPF example
 
