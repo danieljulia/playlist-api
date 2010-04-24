@@ -19,6 +19,7 @@ OAuth
         album         Album on which the track appears
         trackNum      The track number on the album (integer)
         duration      Length of the track in milliseconds (integer)
+        starred       True if the track is "starred" by the authenticated caller
 
 
 ### XSPF example
@@ -34,6 +35,7 @@ OAuth
           <title>Ghost Trail</title>
           <creator>Cult Of Luna</creator>
           <album>Eternal Kingdom</album>
+          <meta rel="spotify:meta:starred">true</meta>
         </track>
         ...
       </trackList>
@@ -58,7 +60,8 @@ OAuth
             "identifier": "spotify:album:51fF4JNsyx99YAWixRgmVh"
           },
           "trackNum": 3,
-          "duration" 710000
+          "duration" 710000,
+          "starred": true
         }
       ]
     }
@@ -144,7 +147,7 @@ XML response:
 
 Retrieve `user`s special "Starred" playlist.
 
-
+The response is the same as for any playlist.
 
 
 
