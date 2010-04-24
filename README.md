@@ -237,7 +237,7 @@ Example:
     > GET /playlists/xyz123
 
 
-### PUT,POST /playlist <- {playlist}
+### POST /playlist <- {playlist}
 
 Create a new playlist as the authenticated user.
 
