@@ -268,35 +268,67 @@ Example:
     ["spotify:track:5xft6jBZvMHRD1jyTDPQXx","spotify:track:1MD4tX2g5hx0D2WQ6JsC2m"]
 
 
-### POST /playlist/{id}/remove?src-index&src-count&dst-index <- list of track URIs
+### POST /playlist/{id}/move?src-index&count&dst-index
 
-Insert one or more tracks into playlist `{id}` at `{index}`.
+Move `{count}` tracks in playlist `{id}` from `{src-index}` to `{dst-index}`.
 
 **Authorization:** required, same owner or collaborator
 
 - `src-index` The start position of the tracks to move.
-- `src-count` The number of tracks, starting at `src-index`, to move (or "select").
+- `count` The number of tracks, starting at `src-index`, to move (or "select").
 - `dst-index` The position where to move (or "land") the tracks, expressed in your versions coordinates.
 
 Example -- move the first two tracks down past the next two tracks:
 
 List before the modification:
 
-    0. Track A
-    1. Track B
-    2. Track C
-    3. Track D
+    0: Track A
+    1: Track B
+    2: Track C
+    3: Track D
+    4: Track E
 
 POSTing:
 
-    POST /playlist/6welunS19b7RD9lodXrhuG/remove?src-index=0&src-count=2&dst-index=2
+    POST /playlist/6welunS19b7RD9lodXrhuG/move?src-index=0&count=2&dst-index=2
 
 List after the modification:
 
-    0. Track C
-    1. Track D
-    2. Track A
-    3. Track B
+    0: Track C
+    1: Track D
+    2: Track A
+    3: Track B
+    4: Track E
+
+
+### POST /playlist/{id}/remove?index&count
+
+Remove `{count}` tracks from playlist `{id}` starting at `{index}`.
+
+**Authorization:** required, same owner or collaborator
+
+- `index` The start position of the tracks to remove.
+- `count` The number of tracks to delete, starting at `index`.
+
+Example -- remove the first two tracks:
+
+List before the modification:
+
+    0: Track A
+    1: Track B
+    2: Track C
+    3: Track D
+    4: Track E
+
+POSTing:
+
+    POST /playlist/6welunS19b7RD9lodXrhuG/remove?index=0&count=2
+
+List after the modification:
+
+    0: Track C
+    1: Track D
+    2: Track E
 
 
 
