@@ -10,6 +10,7 @@ Abilities:
   - Add a playlist (the left hand column in the desktop client)
   - Remove a playlist
   - Reorder the list
+- Create a new playlist
 - Query a specific playlist
 - Query a special playlist (i.e. "Starred" or "Purchases")
 - Modify a specific playlist
