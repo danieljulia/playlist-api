@@ -136,7 +136,11 @@ JSON response:
     {"message":"The foo argument is empty"}
 
 
-## API methods
+# API methods
+
+---
+
+## Querying playlists
 
 ### GET /user/playlists/regular -> ordered list of {playlist}s
 
@@ -186,13 +190,6 @@ Retrieve any playlist by identifier `{id}`.
 **Authorization:** no
 
 
-### PUT,POST /playlist/{id} -> {playlist}
-
-Save any playlist by identifier `{id}`.
-
-**Authorization:** required, same owner
-
-
 ### GET /user/playlists/special/starred -> {playlist}
 
 Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
@@ -209,6 +206,67 @@ Retrieve `user`s special "Purchases" playlist, containing all tracks a user has 
 **Authorization:** required, same owner
 
 The response is the same as for any playlist.
+
+---
+
+## Manipulating playlists
+
+As we perform server-side merging of modifications, a modification request might
+result in a few different status codes:
+
+- `200 OK` -- Modifications applied and your version is the latest.
+
+- `201 Created` -- The playlist was created.
+
+- `205 Reset Content` -- The modification was accepted but resulted in a dirty state. See below for details.
+
+You will *never* get a `409 Conflict`, since conflicts are resolved automagically.
+
+**Modifications implying incorporation of remote edits:**
+
+If a modification was accepted but resulted in a dirty state, you will get a
+205 Reset Content response, indication your client should reload the playlist
+from the server.
+
+Example:
+
+    > GET /playlists/xyz123
+    # Some time passes and the playlist is modified by another client.
+    > POST /playlists/xyz123
+    < 205 Reset Content
+    > GET /playlists/xyz123
+
+
+### PUT,POST /playlist <- {playlist}
+
+Create a new playlist as the authenticated user.
+
+**Authorization:** required
+
+**Request entitiy**:
+
+A {playlist} object, except the `version` and `identifier` members should not be present.
+
+
+### POST /playlist/{id}/add?index={position} <- list of track URIs
+
+Insert one or more tracks into playlist `{id}` at `{index}`.
+
+**Authorization:** required, same owner or collaborator
+
+- `index={position}` The position in the list where to insert the tracks. Indices are 0-based.
+
+**Request entitiy**:
+
+List of tracks URIs
+
+Example:
+
+    POST /playlist/6welunS19b7RD9lodXrhuG/add?index=4
+    Content-type: application/json
+    
+    ["spotify:track:5xft6jBZvMHRD1jyTDPQXx","spotify:track:1MD4tX2g5hx0D2WQ6JsC2m"]
+
 
 
 
