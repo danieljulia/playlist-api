@@ -145,7 +145,14 @@ XML response:
 
 ### GET /user/playlists/starred -> {playlist}
 
-Retrieve `user`s special "Starred" playlist.
+Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
+
+The response is the same as for any playlist.
+
+
+### GET /user/playlists/purchases -> {playlist}
+
+Retrieve `user`s special "Purchases" playlist, containing all tracks a user has purchased.
 
 The response is the same as for any playlist.
 
