@@ -21,21 +21,21 @@ OAuth
 
 ## A playlist entity
 
-    version       The version of the playlist in the Spotify system (integer).
-    identifier    The Spotify URI of the playlist.
-    title         Title of the playlist.
-    creator       Username of the user who created the playlist.
-    description   Free text description.
-    image         Playlist image.
-    trackList     List of tracks.
-      identifier    The Spotify URI of the track.
-      title         Name of the track.
-      creator       Artist(s) performing the track.
-      album         Album on which the track appears.
-      trackNum      The track number on the album (integer).
-      duration      Length of the track in milliseconds (integer).
-      meta          Further metadata mapped by key prefixed by "spotify:meta:".
-        starred       True if the track is "starred" by the authenticated caller.
+    version         The version of the playlist in the Spotify system (integer).
+    identifier      The Spotify URI of the playlist.
+    title           Title of the playlist.
+    creator         Username of the user who created the playlist.
+    collaborative   Indicates if everyone can edit the contents (tracks) or not.
+    annotation      Free text description.
+    image           URL to the playlists image.
+    trackList       List of tracks.
+      identifier      The Spotify URI of the track.
+      title           Name of the track.
+      creator         Artist(s) performing the track.
+      album           Album on which the track appears.
+      trackNum        The track number on the album (integer).
+      duration        Length of the track in milliseconds (integer).
+      starred         Indicates if the track is "starred" by the authenticated caller.
 
 ## Ideas & requests under consideration
 
@@ -52,6 +52,10 @@ OAuth
       <identifier>spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG</identifier>
       <title>Spotify playlist</title>
       <creator>smedjan</creator>
+      <image>http://spotify.tld/path/to/image.jpg</image>
+      <annotation>Playlist API example playlist</annotation>
+      <meta rel="spotify:meta:collaborative">true</meta>
+      <meta rel="spotify:meta:image">http://spotify.tld/path/to/image.jpg</meta>
       <trackList>
         <track>
           <identifier>spotify:track:0v7T2Xu3kpHj1JiaOvt7gm</identifier>
@@ -358,7 +362,7 @@ Example:
     <JPEG data>
 
 
-### POST /playlist/{id}/description <- text
+### POST /playlist/{id}/annotation <- text
 
 Edit the free-text description of playlist `{id}`.
 
@@ -368,7 +372,7 @@ UTF-8 encoded text.
 
 Example:
 
-    POST /playlist/6welunS19b7RD9lodXrhuG/description
+    POST /playlist/6welunS19b7RD9lodXrhuG/annotation
     Content-type: text/plain
     Content-length: 21
     
