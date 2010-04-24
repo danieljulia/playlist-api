@@ -243,7 +243,7 @@ Create a new playlist as the authenticated user.
 
 **Authorization:** required
 
-**Request entitiy**:
+**Request entity**:
 
 A {playlist} object, except the `version` and `identifier` members should not be present.
 
@@ -254,9 +254,9 @@ Insert one or more tracks into playlist `{id}` at `{index}`.
 
 **Authorization:** required, same owner or collaborator
 
-- `index` The position in the list where to insert the tracks. Indices are 0-based.
+- `index` -- The position in the list where to insert the tracks. Indices are 0-based.
 
-**Request entitiy**:
+**Request entity**:
 
 List of tracks URIs
 
@@ -274,9 +274,9 @@ Move `{count}` tracks in playlist `{id}` from `{src-index}` to `{dst-index}`.
 
 **Authorization:** required, same owner or collaborator
 
-- `src-index` The start position of the tracks to move.
-- `count` The number of tracks, starting at `src-index`, to move (or "select").
-- `dst-index` The position where to move (or "land") the tracks, expressed in your versions coordinates.
+- `src-index` -- The start position of the tracks to move.
+- `count` -- The number of tracks, starting at `src-index`, to move (or "select").
+- `dst-index` -- The position where to move (or "land") the tracks, expressed in your versions coordinates.
 
 Example -- move the first two tracks down past the next two tracks:
 
@@ -307,8 +307,8 @@ Remove `{count}` tracks from playlist `{id}` starting at `{index}`.
 
 **Authorization:** required, same owner or collaborator
 
-- `index` The start position of the tracks to remove.
-- `count` The number of tracks to delete, starting at `index`.
+- `index` -- The start position of the tracks to remove.
+- `count` -- The number of tracks to delete, starting at `index`.
 
 Example -- remove the first two tracks:
 
@@ -331,6 +331,45 @@ List after the modification:
     2: Track E
 
 
+### POST /playlist/{id}/collaborative?enabled
+
+Toggle collaborative mode for playlist `{id}`.
+
+**Authorization:** required, same owner
+
+- `enabled` -- `true` to enable other people to edit the contents of the playlist,
+  or false to only allow the ower to edit the playlist.
 
 
+### POST /playlist/{id}/image <- image data
 
+Assign a custom image to playlist `{id}`.
+
+**Request entity**:
+
+The image data. An empty request entity means "clear the image".
+
+Example:
+
+    POST /playlist/6welunS19b7RD9lodXrhuG/image
+    Content-type: image/jpeg
+    Content-length: 22355
+    
+    <JPEG data>
+
+
+### POST /playlist/{id}/description <- text
+
+Edit the free-text description of playlist `{id}`.
+
+**Request entity**:
+
+UTF-8 encoded text.
+
+Example:
+
+    POST /playlist/6welunS19b7RD9lodXrhuG/description
+    Content-type: text/plain
+    Content-length: 21
+    
+    Latest French nu-jazz
