@@ -25,6 +25,8 @@ OAuth
     identifier    The Spotify URI of the playlist.
     title         Title of the playlist.
     creator       Username of the user who created the playlist.
+    description   Free text description
+    image         Playlist image
     trackList     List of tracks.
       identifier    The Spotify URI of the track.
       title         Name of the track
