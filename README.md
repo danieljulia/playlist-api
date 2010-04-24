@@ -186,11 +186,18 @@ Retrieve any playlist by identifier `{id}`.
 **Authorization:** no
 
 
+### PUT,POST /playlist/{id} -> {playlist}
+
+Save any playlist by identifier `{id}`.
+
+**Authorization:** required, same owner
+
+
 ### GET /user/playlists/special/starred -> {playlist}
 
 Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
 
-**Authorization:** required
+**Authorization:** required, same owner
 
 The response is the same as for any playlist.
 
@@ -199,7 +206,7 @@ The response is the same as for any playlist.
 
 Retrieve `user`s special "Purchases" playlist, containing all tracks a user has purchased.
 
-**Authorization:** required
+**Authorization:** required, same owner
 
 The response is the same as for any playlist.
 
