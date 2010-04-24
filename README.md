@@ -25,11 +25,11 @@ OAuth
     identifier    The Spotify URI of the playlist.
     title         Title of the playlist.
     creator       Username of the user who created the playlist.
-    description   Free text description
-    image         Playlist image
+    description   Free text description.
+    image         Playlist image.
     trackList     List of tracks.
       identifier    The Spotify URI of the track.
-      title         Name of the track
+      title         Name of the track.
       creator       Artist(s) performing the track.
       album         Album on which the track appears.
       trackNum      The track number on the album (integer).
@@ -42,7 +42,7 @@ OAuth
 - Requesting older versions e.g. stateless undo.
 - Store arbitrary values (key-value style) in a playlist
 - Embedded statistics (e.g. track popularity, subscribers, etc)
-
+- 
 
 ### XSPF example
 
@@ -140,6 +140,10 @@ JSON response:
 
 ### GET /user/playlists/regular -> ordered list of {playlist}s
 
+Retrieve the list of regular playlists for a `user`.
+
+**Authorization:** required
+
     GET /smedjan/playlists.json
 
 JSON response:
@@ -179,10 +183,14 @@ XML response:
 
 Retrieve any playlist by identifier `{id}`.
 
+**Authorization:** no
+
 
 ### GET /user/playlists/special/starred -> {playlist}
 
 Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
+
+**Authorization:** required
 
 The response is the same as for any playlist.
 
@@ -190,6 +198,8 @@ The response is the same as for any playlist.
 ### GET /user/playlists/special/purchases -> {playlist}
 
 Retrieve `user`s special "Purchases" playlist, containing all tracks a user has purchased.
+
+**Authorization:** required
 
 The response is the same as for any playlist.
 
