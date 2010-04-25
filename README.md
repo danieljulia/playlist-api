@@ -3,17 +3,25 @@
 Public collaboration of our upcoming (web-based) playlist API during
 [Music Hack Day Amsterdam, Apr 24 2010](http://amsterdam.musichackday.org/).
 
-Abilities:
+Feedback is welcome at [feedback@spotify.com](mailto:feedback@spotify.com).
 
-- Retrieve the list of playlists for a users
-- Modify the list of playlists for a users
-  - Add a playlist (the left hand column in the desktop client)
+## Abilities
+
+- Retrieve a container of playlists for a given user (there are different containers, e.g. "Regular", "Starred" etc.)
+- Modify a container of playlists for a given user
+  - Add a playlist
   - Remove a playlist
   - Reorder the list
 - Create a new playlist
 - Query a specific playlist
-- Query a special playlist (i.e. "Starred" or "Purchases")
 - Modify a specific playlist
+
+## Ideas & requests under consideration
+
+- Requesting older versions e.g. stateless undo.
+- Store arbitrary values (key-value style) in a playlist
+- Embedded statistics (e.g. track popularity, subscribers, etc)
+- Creating a "disconnected" playlist. i.e. one that is not yet present in a container of playlists
 
 ## Authentication
 
@@ -21,98 +29,115 @@ OAuth
 
 ## A playlist entity
 
-    version         The version of the playlist in the Spotify system (integer).
-    identifier      The Spotify URI of the playlist.
+    version         The version of the playlist in the Spotify system.
+    uri             The Spotify URI of the playlist (named "identifier" in XSPF)
     title           Title of the playlist.
     creator         Username of the user who created the playlist.
     collaborative   Indicates if everyone can edit the contents (tracks) or not.
     annotation      Free text description.
     image           URL to the playlists image.
-    trackList       List of tracks.
-      identifier      The Spotify URI of the track.
+    tracks          List of tracks (named "trackList" in XSPF)
+      uri           The Spotify URI of the track (named "identifier" in XSPF).
       title           Name of the track.
-      creator         Artist(s) performing the track.
+      artists         Artist(s) performing the track (named "creator" in XSPF).
       album           Album on which the track appears.
-      trackNum        The track number on the album (integer).
-      duration        Length of the track in milliseconds (integer).
+      number          The track number on the album (named "trackNum" in XSPF).
+      duration        Length of the track in milliseconds.
       starred         Indicates if the track is "starred" by the authenticated caller.
 
-## Ideas & requests under consideration
-
-- Requesting older versions e.g. stateless undo.
-- Store arbitrary values (key-value style) in a playlist
-- Embedded statistics (e.g. track popularity, subscribers, etc)
-- 
 
 ### XSPF example
 
     <?xml version="1.0" encoding="utf-8"?>
     <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://www.spotify.com/ns/music/1"
-        version="1" sp:version="123">
+        version="1" sp:version="XYZ123">
       <identifier>spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG</identifier>
       <title>Spotify playlist</title>
       <creator>smedjan</creator>
       <image>http://spotify.tld/path/to/image.jpg</image>
       <annotation>Playlist API example playlist</annotation>
-      <meta rel="spotify:meta:collaborative">true</meta>
-      <meta rel="spotify:meta:image">http://spotify.tld/path/to/image.jpg</meta>
+      <extension application="http://spotify.com">
+        <sp:meta collaborative="true" />
+      </extension>
       <trackList>
         <track>
           <identifier>spotify:track:0v7T2Xu3kpHj1JiaOvt7gm</identifier>
           <title>Ghost Trail</title>
-          <creator>Cult Of Luna</creator>
-          <album>Eternal Kingdom</album>
-          <meta rel="spotify:meta:starred">true</meta>
+          <creator>Crookers</creator>
+          <album>We Love Animals</album>
+          <extension application="http://spotify.com">
+            <sp:artist uri="spotify:artist:3o1cwVQfiDWafhYA02k13C">Crookers</sp:artist>
+            <sp:artist uri="spotify:artist:2bYg3DwtzQ5LWztZHwbWb3">Mixhell</sp:artist>
+            ...
+            <sp:album uri="spotify:album:5mW7HUDpbEaVneZBd70FBt" />
+            <sp:meta starred="true" />
+          </extension>
         </track>
         ...
       </trackList>
     </playlist>
 
+
 ### JSON example
 
     {
-      "version": 123,
-      "identifier": "spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG",
+      "version": "XYZ123",
+      "uri": "spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG",
       "title": "Spotify playlist",
       "creator": "smedjan",
-      "trackList": [
+      "image": "http://spotify.tld/path/to/image.jpg",
+      "annotation": "Playlist API example playlist",
+      "collaborative": true,
+      "tracks": [
         {
-          "identifier": "spotify:track:0v7T2Xu3kpHj1JiaOvt7gm",
+          "uri": "spotify:track:0v7T2Xu3kpHj1JiaOvt7gm",
           "title": "Ghost Trail",
-          "creator": {
-            "title": "Cult Of Luna",
-            "identifier": "spotify:artist:7E7fJJpdVgr1F3pfAfRtHe"
-          },
+          "artists": [
+            {
+              "title": "Crookers",
+              "uri": "spotify:artist:3o1cwVQfiDWafhYA02k13C"
+            },
+            {
+              "title": "Maxhell",
+              "uri": "spotify:artist:2bYg3DwtzQ5LWztZHwbWb3"
+            },
+            ...
+          ],
           "album": {
-            "title": "Eternal Kingdom",
-            "identifier": "spotify:album:51fF4JNsyx99YAWixRgmVh"
+            "title": "We Love Animals",
+            "uri": "spotify:album:5mW7HUDpbEaVneZBd70FBt"
           },
-          "trackNum": 3,
-          "duration" 710000,
-          "meta": {"starred": true}
+          "number": 3,
+          "duration": 710000,
+          "starred": true,
         },
         ...
-      ]
+      ],
     }
 
 Further called `{playlist}`.
 
+
 ## Outline
 
-    GET /user/{username}/playlists -> ordered list of {playlist}s
-      List a users regular playlists
-    
-    GET /user/{username}/playlists/starred -> ordered list of {playlist}s
-      List the contents of a users "Starred" playlist
-      @auth required
-    
-    GET /user/{username}/playlists/purchases -> ordered list of {playlist}s
-      List the contents of a users "Starred" playlist
-      @auth required
-    
-    GET /user/{username}/playlists/purchases -> ordered list of {playlist}s
-      List the contents of a users "Starred" playlist
-      @auth required
+These are the currently available requests (we're still in the progress of
+determining what the base URL should look like).
+
+    GET /user/{username}/playlists/regular -> ordered list of {playlist}s
+    GET /user/{username}/playlists/special/starred -> ordered list of {playlist}s
+    GET /user/{username}/playlists/special/purchases -> ordered list of {playlist}s
+    GET /playlist/{id} -> {playlist}
+
+    POST /playlist <- {playlist}
+    POST /playlist/{id}/add?index <- list of track URIs
+    POST /playlist/{id}/move?src-index&count&dst-index
+    POST /playlist/{id}/remove?index&count
+    POST /playlist/{id}/collaborative?enabled
+    POST /playlist/{id}/image <- image data
+    POST /playlist/{id}/annotation <- text
+
+Each request is described in detail in `API methods`.
+
 
 ## Error responses
 
@@ -127,7 +152,7 @@ The response entity of an error (unless in the case of "bodyless" responses, as
 defined by [HTTP/1.1](http://www.w3.org/Protocols/rfc2616/rfc2616.html))
 contains a simple human-readable message, primarily aiding development.
 
-XML response:
+XSPF response:
 
     HTTP/1.1 400 Bad Request
     
@@ -152,15 +177,15 @@ Retrieve the list of regular playlists for a `user`.
 
 **Authorization:** required
 
-    GET /user/smedjan/playlists.json
+    GET /user/smedjan/playlists/regular.json
 
 JSON response:
 
     {
       "playlists":[
         {
-          "version": "4",
-          "identifier": "spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG",
+          "version": "XYZ123",
+          "uri": "spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG",
           "title": "Spotify playlist",
           "creator": "smedjan"
         }
@@ -168,16 +193,13 @@ JSON response:
       ]
     }
 
-XML response:
+XSPF response:
 
     <?xml version="1.0" encoding="utf-8"?>
     <playlist xmlns="http://xspf.org/ns/0/" xmlns:sp="http://www.spotify.com/ns/music/1" 
         version="1" sp:version="4">
       <trackList>
         <track>
-          <extension application="http://spotify.com">
-            <sp:playlist collaborative="true" />
-          </extension>
           <identifier>spotify:user:smedjan:playlist:6welunS19b7RD9lodXrhuG</identifier>
           <title>Spotify playlist</title>
           <creator>smedjan</creator>
@@ -187,14 +209,7 @@ XML response:
     </playlist>
 
 
-### GET /playlist/{id} -> {playlist}
-
-Retrieve any playlist by identifier `{id}`.
-
-**Authorization:** no
-
-
-### GET /user/{username}/playlists/special/starred -> {playlist}
+### GET /user/{username}/playlists/special/starred -> ordered list of {playlist}s
 
 Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
 
@@ -203,13 +218,21 @@ Retrieve `user`s special "Starred" playlist, containing all tracks a user have "
 The response is the same as for any playlist.
 
 
-### GET /user/{username}/playlists/special/purchases -> {playlist}
+### GET /user/{username}/playlists/special/purchases -> ordered list of {playlist}s
 
 Retrieve `user`s special "Purchases" playlist, containing all tracks a user has purchased.
 
 **Authorization:** required, same owner
 
 The response is the same as for any playlist.
+
+
+### GET /playlist/{id} -> {playlist}
+
+Retrieve any playlist by identifier `{id}`.
+
+**Authorization:** no
+
 
 ---
 
