@@ -99,18 +99,18 @@ Further called `{playlist}`.
 
 ## Outline
 
-    GET /user/playlists -> ordered list of {playlist}s
+    GET /user/{username}/playlists -> ordered list of {playlist}s
       List a users regular playlists
     
-    GET /user/playlists/starred -> ordered list of {playlist}s
+    GET /user/{username}/playlists/starred -> ordered list of {playlist}s
       List the contents of a users "Starred" playlist
       @auth required
     
-    GET /user/playlists/purchases -> ordered list of {playlist}s
+    GET /user/{username}/playlists/purchases -> ordered list of {playlist}s
       List the contents of a users "Starred" playlist
       @auth required
     
-    GET /user/playlists/purchases -> ordered list of {playlist}s
+    GET /user/{username}/playlists/purchases -> ordered list of {playlist}s
       List the contents of a users "Starred" playlist
       @auth required
 
@@ -146,13 +146,13 @@ JSON response:
 
 ## Querying playlists
 
-### GET /user/playlists/regular -> ordered list of {playlist}s
+### GET /user/{username}/playlists/regular -> ordered list of {playlist}s
 
 Retrieve the list of regular playlists for a `user`.
 
 **Authorization:** required
 
-    GET /smedjan/playlists.json
+    GET /user/smedjan/playlists.json
 
 JSON response:
 
@@ -194,7 +194,7 @@ Retrieve any playlist by identifier `{id}`.
 **Authorization:** no
 
 
-### GET /user/playlists/special/starred -> {playlist}
+### GET /user/{username}/playlists/special/starred -> {playlist}
 
 Retrieve `user`s special "Starred" playlist, containing all tracks a user have "starred".
 
@@ -203,7 +203,7 @@ Retrieve `user`s special "Starred" playlist, containing all tracks a user have "
 The response is the same as for any playlist.
 
 
-### GET /user/playlists/special/purchases -> {playlist}
+### GET /user/{username}/playlists/special/purchases -> {playlist}
 
 Retrieve `user`s special "Purchases" playlist, containing all tracks a user has purchased.
 
