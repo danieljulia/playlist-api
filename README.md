@@ -7,8 +7,8 @@ Feedback is welcome at [feedback@spotify.com](mailto:feedback@spotify.com).
 
 ## Abilities
 
-- Retrieve a container of playlists for a given user (there are different containers, e.g. "Regular", "Starred" etc.)
-- Modify a container of playlists for a given user
+- List playlists for a given user (there are different lists, e.g. "Regular", "Starred" etc.)
+- Modify a list of playlists for a given user
   - Add a playlist
   - Remove a playlist
   - Reorder the list
@@ -22,6 +22,7 @@ Feedback is welcome at [feedback@spotify.com](mailto:feedback@spotify.com).
 - Store arbitrary values (key-value style) in a playlist
 - Embedded statistics (e.g. track popularity, subscribers, etc)
 - Creating a "disconnected" playlist. i.e. one that is not yet present in a container of playlists
+- Respond with CORS headers so web browsers can be used
 
 ## Authentication
 
