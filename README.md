@@ -66,10 +66,10 @@ OAuth
           <creator>Crookers</creator>
           <album>We Love Animals</album>
           <extension application="http://spotify.com">
-            <sp:artist uri="spotify:artist:3o1cwVQfiDWafhYA02k13C">Crookers</sp:artist>
-            <sp:artist uri="spotify:artist:2bYg3DwtzQ5LWztZHwbWb3">Mixhell</sp:artist>
+            <sp:artist uri="spotify:artist:3o1cwVQfiDWafhYA02k13C" image="http://spotify.tld/path/to/image.jpg">Crookers</sp:artist>
+            <sp:artist uri="spotify:artist:2bYg3DwtzQ5LWztZHwbWb3" image="http://spotify.tld/path/to/image.jpg">Mixhell</sp:artist>
             ...
-            <sp:album uri="spotify:album:5mW7HUDpbEaVneZBd70FBt" />
+            <sp:album uri="spotify:album:5mW7HUDpbEaVneZBd70FBt" image="http://spotify.tld/path/to/image.jpg">We Love Animals</sp:album>
             <sp:meta starred="true" />
           </extension>
         </track>
@@ -94,18 +94,21 @@ OAuth
           "title": "Ghost Trail",
           "artists": [
             {
+              "uri": "spotify:artist:3o1cwVQfiDWafhYA02k13C",
               "title": "Crookers",
-              "uri": "spotify:artist:3o1cwVQfiDWafhYA02k13C"
+              "image": "http://spotify.tld/path/to/image.jpg"
             },
             {
+              "uri": "spotify:artist:2bYg3DwtzQ5LWztZHwbWb3",
               "title": "Maxhell",
-              "uri": "spotify:artist:2bYg3DwtzQ5LWztZHwbWb3"
+              "image": "http://spotify.tld/path/to/image.jpg"
             },
             ...
           ],
           "album": {
+            "uri": "spotify:album:5mW7HUDpbEaVneZBd70FBt",
             "title": "We Love Animals",
-            "uri": "spotify:album:5mW7HUDpbEaVneZBd70FBt"
+            "image": "http://spotify.tld/path/to/image.jpg"
           },
           "number": 3,
           "duration": 710000,
